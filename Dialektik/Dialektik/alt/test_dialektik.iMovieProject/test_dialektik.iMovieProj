@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>audioClips</key>
+	<array/>
+	<key>audioTrashClips</key>
+	<array/>
+	<key>lastClipUniqueID</key>
+	<integer>0</integer>
+	<key>playheadPosition</key>
+	<integer>0</integer>
+	<key>relativePlayHeadPosition</key>
+	<real>0.0</real>
+	<key>selectionEndFrame</key>
+	<integer>-1</integer>
+	<key>selectionStartFrame</key>
+	<integer>-1</integer>
+	<key>selectionType</key>
+	<integer>0</integer>
+	<key>timelineZoom</key>
+	<real>1</real>
+	<key>version</key>
+	<string>4.1</string>
+	<key>videoClips</key>
+	<array/>
+	<key>videoStandard</key>
+	<string>DV-PAL</string>
+	<key>videoTrashClips</key>
+	<array/>
+	<key>writingApplicationName</key>
+	<string>iMovie</string>
+	<key>writingApplicationVersion</key>
+	<string>4.1</string>
+</dict>
+</plist>

@@ -1,0 +1,84 @@
+{\rtf1\mac\ansicpg10000\cocoartf102
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;\f1\fswiss\fcharset77 Helvetica-Bold;\f2\fmodern\fcharset77 Courier-Bold;
+}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww12720\viewh9120\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural
+
+\f0\fs24 \cf0 \
+\
+fraktal in processing.\
+pseudocode.\
+\
+
+\f1\b\fs28 \
+fractal tree\
+
+\f0\b0\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\f2\b\fs26 \cf0 DrawTree(n, direction, length)\
+	if n > 0 do\
+		DrawTrunk(direction, length)\
+		DrawTree(n-1, 3DRandomAngle(direction), length*Factor(n))\
+		DrawTree(n-1, direction + random % 10, length*Factor(n))\
+		DrawTree(n-1, 3DRandomAngle(direction),length*Factor(n))\
+	else\
+        DrawLeaf()\
+    end if\
+end DrawTree
+\f0\b0\fs24 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural
+\cf0 \
+\
+\
+\
+
+\f1\b\fs28 binary random number\
+
+\f0\b0\fs24 \
+int = number\
+lade schrift\
+\
+schleife ein\
+bildschirm schwarz\
+generiere number = eine zufallszahl zwischen 0 und 1\
+print number to screen mit schrift\
+schleife aus\
+\
+\
+\
+\
+\
+\
+\
+hintergrund schwarz\
+generiere erste zufallszahl\
+setzte ffarbe auf wei\'a7\
+x=0\
+a=0\
+\
+>> schleife ein\
+\
+wenn a = 0 und x=5 dann ffarbe= schwarz und x=0 und a=1  (5 frames wei\'a7)\
+wenn a=1 und x=2 dann ffarbe=wei\'a7 und x= und a=0  und generiere neue zufallszahl (5 frames schwarz)\
+setze f\'9fllfarbe\
+\pard\tx565\tx1133\tx1700\tx2266\tx2833\tx3401\tx3967\tx4535\tx5102\tx5669\tx6235\tx6802\ql\qnatural
+\cf0 schreibe zufallszahl in ffarbe\
+x = x+1 bis x=3 dann x=0\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural
+\cf0 \
+return\
+schleife return\
+\
+\
+\
+\
+for (x=0; x<5; x=x+1) \{\
+fcol =(255); println(x);\
+\
+\}\
+\
+\
+0721 1602936\
+}
