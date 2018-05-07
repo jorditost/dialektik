@@ -3,9 +3,9 @@
   #include <avr/power.h>
 #endif
 
-#define PIN 6
+#define PIN 7
 
-#define NUM_LEDS 8
+#define NUM_LEDS 60
 
 #define BRIGHTNESS 50
 

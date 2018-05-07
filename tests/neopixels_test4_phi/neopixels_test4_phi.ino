@@ -1,6 +1,45 @@
-/*
-  NeoPixels Functions
-*/
+#include <Adafruit_NeoPixel.h>
+#ifdef __AVR__
+  #include <avr/power.h>
+#endif
+
+#define PIN_I 6
+#define PIN_O 7
+#define NUM_LEDS_I 32
+#define NUM_LEDS_O 60
+
+#define BRIGHTNESS 50
+
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS_I, PIN_I, NEO_GRBW + NEO_KHZ800);
+Adafruit_NeoPixel ring = Adafruit_NeoPixel(NUM_LEDS_O, PIN_O, NEO_GRBW + NEO_KHZ800);
+
+void setup() {
+  initNeoPixel(&strip);
+  initNeoPixel(&ring);
+}
+
+void loop() {
+  colorWipe(&strip, Adafruit_NeoPixel::Color(255, 0, 0), 50); // Red
+  colorWipe(&ring, Adafruit_NeoPixel::Color(0, 255, 0), 50); // Green
+  colorWipe(&strip, Adafruit_NeoPixel::Color(0, 0, 255), 50); // Blue
+  colorWipe(&ring, Adafruit_NeoPixel::Color(0, 0, 0, 255), 50); // White
+  
+  pulseWhite(&strip, 0);
+  //pulseWhite(&ring, 0);
+
+  whiteOverRainbow(&ring,20,75,5);  
+
+  pulseWhite(&strip, 5); 
+
+  // fullWhite();
+  // delay(2000);
+
+  rainbowFade2White(&ring,3,3,1);
+}
+
+////////////////////////
+// NeoPixel Functions
+////////////////////////
 
 void initNeoPixel(Adafruit_NeoPixel * np) {
   np->setBrightness(BRIGHTNESS);
@@ -200,3 +239,4 @@ uint8_t green(uint32_t c) {
 uint8_t blue(uint32_t c) {
   return (c);
 }
+
