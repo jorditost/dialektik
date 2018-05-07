@@ -12,11 +12,12 @@ output: Some Adafruit NeoPixels in PHI form
   #include <avr/power.h>
 #endif
 
-const int TriggerPin = 8;      //Trig pin
-const int EchoPin = 9;         //Echo pin
-
 boolean debug = true;
 boolean neopixels_test = true;
+
+// Sensor vars
+#define PIN_TRIGGER  8      //Trig pin
+#define PIN_ECHO     9      //Echo pin
 
 // Trim values to set minimum and maximum ranges (will be about actual distances in cm's / 29)
 // The position of the golden cut will be worked out as relative to these two points
@@ -28,7 +29,7 @@ int TRIM_MAX = 300; //960;
 // Golden Ratio
 float PHI = 1 - 0.618;
 
-// NeoPixels
+// NeoPixels vars
 #define PIN_I 6
 #define PIN_O 7
 #define NUM_LEDS_I 32
@@ -38,9 +39,10 @@ float PHI = 1 - 0.618;
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS_I, PIN_I, NEO_GRBW + NEO_KHZ800);
 Adafruit_NeoPixel ring = Adafruit_NeoPixel(NUM_LEDS_O, PIN_O, NEO_GRBW + NEO_KHZ800);
 
+
 void setup() {
-  pinMode(TriggerPin,OUTPUT);  // Trigger is an output pin
-  pinMode(EchoPin,INPUT);      // Echo is an input pin
+  pinMode(PIN_TRIGGER, OUTPUT);  // Trigger is an output pin
+  pinMode(PIN_ECHO, INPUT);      // Echo is an input pin
   if (debug) {
     Serial.begin(9600);        // Serial Output
   }
