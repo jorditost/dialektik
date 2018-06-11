@@ -72,7 +72,9 @@ float getRate(float coefficient) {
   
   float rate;
 
-  if (coefficient < PHI) {
+  if (coefficient > PHI-0.05 && coefficient < PHI+0.05) {
+    rate = 0;
+  } else if (coefficient < PHI) {
     rate = 1 - (coefficient / PHI);
   } else {
     rate = (coefficient - PHI) / (1 - PHI);

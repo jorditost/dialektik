@@ -20,7 +20,7 @@ float PHI = 1 - 0.618;
 // Debug / Test vars
 ///////////////////////
 
-boolean debug = true;
+boolean debug = false;
 boolean neopixelsTest = false;
 
 /////////////////
@@ -99,6 +99,7 @@ void loop() {
 
       // Current rate / glitch delay
       currentRate = getRate(coefficient);
+
       maxGlitchDelay = currentRate * MAX_GLITCH_DELAY;
       
       if (debug) {
