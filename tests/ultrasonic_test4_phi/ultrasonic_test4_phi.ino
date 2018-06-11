@@ -21,7 +21,7 @@ boolean debug = true;
 // What is the base line sensor value which you want to count as being 0
 int TRIM_MIN = 5; //200;
 // What is the maximum sensor value which you want to measure to
-int TRIM_MAX = 200; //960;
+int TRIM_MAX = 100; //960;
 
 // Golden Ratio
 float PHI = 1 - 0.618;
@@ -40,7 +40,6 @@ void loop() {
 
   int distance = getData();
   float coefficient = normalise(distance);
-  
   currentRate = getRate(coefficient);
   
   if (debug) {

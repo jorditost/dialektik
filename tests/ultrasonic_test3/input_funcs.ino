@@ -3,6 +3,10 @@
   Reads from HC-SR04 Ultrasonic Sensor
 */
 
+// What is the maximum display output cycles per second
+int DISPLAY_RATE = 16;
+int FRAME_RATE = 16;
+
 int getData() {
   // In order to generate the ultrasound you need to set the Trig on a High State for 10 µs. 
   // That will send out an 8 cycle sonic burst which will travel at the speed sound and 
@@ -68,7 +72,7 @@ float normalise(int inData) {
   return normalised;
 }
 
-/*float getRate(float coefficient) {
+float getRate(float coefficient) {
   
   float rate;
   
@@ -87,4 +91,4 @@ float normalise(int inData) {
   }
   
   return rate;
-}*/
+}

@@ -9,14 +9,14 @@ int getData() {
   // it will be received in the Echo pin. The Echo pin will output the time in microseconds 
   // the sound wave traveled.
   
-  digitalWrite(PIN_TRIGGER, LOW);                   
+  digitalWrite(TriggerPin, LOW);                   
   delayMicroseconds(2);
-  digitalWrite(PIN_TRIGGER, HIGH);          // Trigger pin to HIGH
+  digitalWrite(TriggerPin, HIGH);          // Trigger pin to HIGH
   delayMicroseconds(10);                   // 10us high 
-  digitalWrite(PIN_TRIGGER, LOW);           // Trigger pin to LOW
+  digitalWrite(TriggerPin, LOW);           // Trigger pin to LOW
 
   // The sensor returns the duration in microseconds
-  long duration = pulseIn(PIN_ECHO,HIGH);   // Waits for the echo pin to get high
+  long duration = pulseIn(EchoPin,HIGH);   // Waits for the echo pin to get high
   return getDistance(duration);            // Use function to calculate the distance
 }
 
