@@ -37,6 +37,7 @@ void loop() {
   rainbowFade2White(&ring,3,3,1);
 }
 
+
 ////////////////////////
 // NeoPixel Functions
 ////////////////////////
