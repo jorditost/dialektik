@@ -47,7 +47,7 @@ unsigned long lastTime = 0;
 
 #define PIN_I 6
 #define PIN_O 7
-#define NUM_LEDS_I 32
+#define NUM_LEDS_I 40
 #define NUM_LEDS_O 60
 #define BRIGHTNESS 50
 #define MAX_GLITCH_DELAY 200
