@@ -34,28 +34,28 @@ int getDistance (long time) {
 
 float normalise(int inData) {
   
-  if (inData < TRIM_MIN) {
+  if (inData < DISTANCE_MIN) {
     if (debug) {
       Serial.print("normalise(): low value ");
       Serial.print(inData);
       Serial.print(" rebased to minimum ");
-      Serial.println(TRIM_MIN);
+      Serial.println(DISTANCE_MIN);
     } 
-    inData = TRIM_MIN;
+    inData = DISTANCE_MIN;
   }
   
-  if (inData > TRIM_MAX) {
+  if (inData > DISTANCE_MAX) {
     if (debug) {
       Serial.print("normalise(): high value ");
       Serial.print(inData);
       Serial.print(" rebased to maximum ");
-      Serial.println(TRIM_MAX);
+      Serial.println(DISTANCE_MAX);
     } 
-    inData = TRIM_MAX;
+    inData = DISTANCE_MAX;
   }
   
-  float rebased = inData - TRIM_MIN;
-  float diff = TRIM_MAX - TRIM_MIN;
+  float rebased = inData - DISTANCE_MIN;
+  float diff = DISTANCE_MAX - DISTANCE_MIN;
   float normalised = rebased / diff;
   
   if (debug) {
@@ -72,7 +72,7 @@ float getRate(float coefficient) {
   
   float rate;
 
-  if (coefficient > PHI-0.05 && coefficient < PHI+0.05) {
+  if (coefficient > PHI-0.02 && coefficient < PHI+0.02) {
     rate = 0;
   } else if (coefficient < PHI) {
     rate = 1 - (coefficient / PHI);

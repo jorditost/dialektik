@@ -12,6 +12,22 @@ output: Some Adafruit NeoPixels in PHI form
   #include <avr/power.h>
 #endif
 
+
+////////////
+// Config
+////////////
+
+// Trim values to set minimum and maximum ranges (will be about actual distances in cm's / 29)
+// The position of the golden cut will be worked out as relative to these two points
+
+#define DISTANCE_MIN          3 //200   // What is the base line sensor value which you want to count as being 0
+#define DISTANCE_MAX          100 //960 // What is the maximum sensor value which you want to measure to
+
+#define BLINK_DELAY_MAX       500       // Max time between on/off status while blinking
+#define GLITCH                false      // When glitch is true, then the blinking gets more random
+
+#define SENSOR_READ_INTERVAL  500       // Delay between sensor reads
+
 // Golden Ratio
 float PHI = 1 - 0.618;
 
@@ -30,17 +46,6 @@ boolean neopixelsTest = false;
 #define PIN_TRIGGER  8      //Trig pin
 #define PIN_ECHO     9      //Echo pin
 
-// Trim values to set minimum and maximum ranges (will be about actual distances in cm's / 29)
-// The position of the golden cut will be worked out as relative to these two points
-// What is the base line sensor value which you want to count as being 0
-int TRIM_MIN = 3; //200;
-// What is the maximum sensor value which you want to measure to
-int TRIM_MAX = 100; //960;
-
-// Delay between sensor reads
-#define SENSOR_READ_INTERVAL  800
-unsigned long lastTime = 0;
-
 ////////////////////
 // NeoPixels vars
 ////////////////////
@@ -50,13 +55,13 @@ unsigned long lastTime = 0;
 #define NUM_LEDS_I 40
 #define NUM_LEDS_O 60
 #define BRIGHTNESS 50
-#define MAX_GLITCH_DELAY 200
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS_I, PIN_I, NEO_GRBW + NEO_KHZ800);
 Adafruit_NeoPixel ring = Adafruit_NeoPixel(NUM_LEDS_O, PIN_O, NEO_GRBW + NEO_KHZ800);
 
 float currentRate;
-float maxGlitchDelay;
+float maxBlinkDelay;
+unsigned long lastTime = 0;
 
 
 ///////////
@@ -100,7 +105,8 @@ void loop() {
       // Current rate / glitch delay
       currentRate = getRate(coefficient);
 
-      maxGlitchDelay = currentRate * MAX_GLITCH_DELAY;
+      maxBlinkDelay = currentRate * BLINK_DELAY_MAX;
+      //maxBlinkDelay += 0.1;
       
       if (debug) {
         Serial.print("Distance = ");
@@ -115,8 +121,8 @@ void loop() {
         Serial.print(currentRate);
         Serial.println(" ");
 
-        Serial.print("maxGlitchDelay = ");
-        Serial.print(maxGlitchDelay);
+        Serial.print("maxBlinkDelay = ");
+        Serial.print(maxBlinkDelay);
         Serial.println(" ");
         Serial.println(" ");
       }
@@ -124,15 +130,25 @@ void loop() {
       lastTime = millis();
     }
 
-    // Glitch Phi
-    fullWhite(&strip);
-    delay(random(0, maxGlitchDelay));
-    fullWhite(&ring);
-    delay(random(0, maxGlitchDelay));
-    fullBlack(&strip);
-    delay(random(0, maxGlitchDelay));
-    fullBlack(&ring);
-    delay(random(0, maxGlitchDelay));
+    // Blink PHI
+    //if (maxBlinkDelay > 0.0) {
+      // Blink I
+      fullWhite(&strip);
+      blinkDelay(maxBlinkDelay, GLITCH);
+      fullBlack(&strip);
+      blinkDelay(maxBlinkDelay, GLITCH);
+
+      // Blink O
+      fullWhite(&ring);
+      blinkDelay(maxBlinkDelay, GLITCH);
+      fullBlack(&ring);
+      blinkDelay(0.3*maxBlinkDelay, GLITCH);
+    
+    // Show PHI
+    /*} else {
+      fullWhite(&strip);
+      fullWhite(&ring);
+    }*/
 
 
   // NeoPixel test only (no data read)
@@ -153,6 +169,14 @@ void loop() {
     // delay(2000);
   
     rainbowFade2White(&ring,3,3,1);
+  }
+}
+
+void blinkDelay(float delayTime, boolean isRandomTime) {
+  if (isRandomTime) {
+    delay(random(0, delayTime)); 
+  } else {
+    delay(delayTime);
   }
 }
 
