@@ -10,7 +10,7 @@ void setup() {
  
 void loop() { 
   int d = 10;
-  int delayMS = 1500;
+  int delayMS = 500;
   int i = 0;
   
   for ( i = 1; i < 99; i += d ) {
