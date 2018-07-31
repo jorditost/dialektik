@@ -58,6 +58,10 @@ long getDistance(long time) {
     distanceCalc = (time * 0.034 * 10) / 2; // Actual calculation in mm
     //distanceCalc = ((time /2.9) / 2);     // Actual calculation in mm
     //DistanceCalc = time / 74 / 2;         // Actual calculation in inches
+
+    Serial.print("Distance: ");
+    Serial.println(distanceCalc);
+      
     return distanceCalc;                    // return calculated value
 }
 

@@ -12,6 +12,13 @@ output: Some Adafruit NeoPixels in PHI form
   #include <avr/power.h>
 #endif
 
+///////////////////////
+// Debug / Test vars
+///////////////////////
+
+boolean debug = false;
+boolean neopixelsTest = false;
+
 
 ////////////
 // Config
@@ -20,24 +27,19 @@ output: Some Adafruit NeoPixels in PHI form
 // Trim values to set minimum and maximum ranges (will be about actual distances in cm's / 29)
 // The position of the golden cut will be worked out as relative to these two points
 
-#define DISTANCE_MIN          3 //200   // What is the base line sensor value which you want to count as being 0
-#define DISTANCE_MAX          100 //960 // What is the maximum sensor value which you want to measure to
+#define DISTANCE_MIN          10 //200   // What is the base line sensor value which you want to count as being 0
+#define DISTANCE_MAX          250 //960 // What is the maximum sensor value which you want to measure to
 
-#define BLINK_DELAY_MAX       500       // Max time between on/off status while blinking
+#define BLINK_DELAY_MAX       800       // Max time between on/off status while blinking
 #define GLITCH                false      // When glitch is true, then the blinking gets more random
 
-#define SENSOR_READ_INTERVAL  500       // Delay between sensor reads
+#define SENSOR_READ_INTERVAL  50       // Delay between sensor reads
 
 // Golden Ratio
 float PHI = 1 - 0.618;
+#define MIN_BLINK_RATE        0.01
+#define PHI_BUFFER            0.05
 
-
-///////////////////////
-// Debug / Test vars
-///////////////////////
-
-boolean debug = false;
-boolean neopixelsTest = false;
 
 /////////////////
 // Sensor vars
@@ -54,7 +56,7 @@ boolean neopixelsTest = false;
 #define PIN_O 7
 #define NUM_LEDS_I 40
 #define NUM_LEDS_O 60
-#define BRIGHTNESS 50
+#define BRIGHTNESS 10
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS_I, PIN_I, NEO_GRBW + NEO_KHZ800);
 Adafruit_NeoPixel ring = Adafruit_NeoPixel(NUM_LEDS_O, PIN_O, NEO_GRBW + NEO_KHZ800);
@@ -136,13 +138,13 @@ void loop() {
       fullWhite(&strip);
       blinkDelay(maxBlinkDelay, GLITCH);
       fullBlack(&strip);
-      blinkDelay(maxBlinkDelay, GLITCH);
+      //blinkDelay(0.3*maxBlinkDelay, GLITCH);
 
       // Blink O
       fullWhite(&ring);
       blinkDelay(maxBlinkDelay, GLITCH);
       fullBlack(&ring);
-      blinkDelay(0.3*maxBlinkDelay, GLITCH);
+      //blinkDelay(0.3*maxBlinkDelay, GLITCH);
     
     // Show PHI
     /*} else {

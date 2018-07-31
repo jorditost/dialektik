@@ -35,22 +35,22 @@ int getDistance (long time) {
 float normalise(int inData) {
   
   if (inData < DISTANCE_MIN) {
-    if (debug) {
+    /*if (debug) {
       Serial.print("normalise(): low value ");
       Serial.print(inData);
       Serial.print(" rebased to minimum ");
       Serial.println(DISTANCE_MIN);
-    } 
+    }*/ 
     inData = DISTANCE_MIN;
   }
   
   if (inData > DISTANCE_MAX) {
-    if (debug) {
+    /*if (debug) {
       Serial.print("normalise(): high value ");
       Serial.print(inData);
       Serial.print(" rebased to maximum ");
       Serial.println(DISTANCE_MAX);
-    } 
+    }*/ 
     inData = DISTANCE_MAX;
   }
   
@@ -58,12 +58,12 @@ float normalise(int inData) {
   float diff = DISTANCE_MAX - DISTANCE_MIN;
   float normalised = rebased / diff;
   
-  if (debug) {
+  /*if (debug) {
     Serial.print("normalise(): input value ");
     Serial.print(inData);
     Serial.print(" rebased to ");
     Serial.println(normalised);
-  } 
+  }*/ 
   
   return normalised;
 }
@@ -71,14 +71,29 @@ float normalise(int inData) {
 float getRate(float coefficient) {
   
   float rate;
+  float ALPHA = PHI + PHI_BUFFER;
+  float BETA  = PHI - PHI_BUFFER;
 
-  if (coefficient > PHI-0.02 && coefficient < PHI+0.02) {
-    rate = 0;
+  if (coefficient > ALPHA) {
+    rate = MIN_BLINK_RATE + (coefficient - ALPHA) / (1 - ALPHA);
+  } else if (coefficient < BETA) {
+    rate = MIN_BLINK_RATE + 1 - (coefficient / BETA);
+  } else {
+    rate = MIN_BLINK_RATE;
+  }
+  
+  /*if (coefficient > PHI-0.1 && coefficient < PHI+0.1) {
+    rate = 0.01;//0;
   } else if (coefficient < PHI) {
     rate = 1 - (coefficient / PHI);
   } else {
     rate = (coefficient - PHI) / (1 - PHI);
   }
+
+  // Set a minimum rate
+  if (rate < 0.015) {
+    rate = 0.01;
+  }*/
   
   /*if (coefficient < PHI) {
     rate = 1 + ((coefficient / PHI ) * ( DISPLAY_RATE - 1 ));
@@ -87,12 +102,12 @@ float getRate(float coefficient) {
     rate =  1 + ((1 - relPos) * (DISPLAY_RATE - 1));
   }*/
   
-  /*if (debug) {
+  if (debug) {
     Serial.print("getRate(): coefficent value: ");
     Serial.print(coefficient);
     Serial.print(" means rate of : ");
     Serial.println(rate);
-  }*/
+  }
   
   return rate;
 }
