@@ -16,6 +16,7 @@ output: Some Adafruit NeoPixels in PHI form
 // Debug / Test vars
 ///////////////////////
 
+boolean noiseOn = true;
 boolean debug = false;
 boolean neopixelsTest = false;
 
@@ -27,8 +28,8 @@ boolean neopixelsTest = false;
 // Trim values to set minimum and maximum ranges (will be about actual distances in cm's / 29)
 // The position of the golden cut will be worked out as relative to these two points
 
-#define DISTANCE_MIN          10 //200   // What is the base line sensor value which you want to count as being 0
-#define DISTANCE_MAX          250 //960 // What is the maximum sensor value which you want to measure to
+#define DISTANCE_MIN          3 //200   // What is the base line sensor value which you want to count as being 0
+#define DISTANCE_MAX          100 //960 // What is the maximum sensor value which you want to measure to
 
 #define BLINK_DELAY_MAX       800       // Max time between on/off status while blinking
 #define GLITCH                false      // When glitch is true, then the blinking gets more random
@@ -37,7 +38,7 @@ boolean neopixelsTest = false;
 
 // Golden Ratio
 float PHI = 1 - 0.618;
-#define MIN_BLINK_RATE        0.01
+#define MIN_BLINK_RATE        0.0
 #define PHI_BUFFER            0.05
 
 
@@ -47,6 +48,7 @@ float PHI = 1 - 0.618;
 
 #define PIN_TRIGGER  8      //Trig pin
 #define PIN_ECHO     9      //Echo pin
+
 
 ////////////////////
 // NeoPixels vars
@@ -66,6 +68,12 @@ float maxBlinkDelay;
 unsigned long lastTime = 0;
 
 
+////////////
+// Piezo
+////////////
+
+#define PIN_PIEZO 10
+
 ///////////
 // Setup
 ///////////
@@ -76,6 +84,10 @@ void setup() {
   initNeoPixel(&strip);
   initNeoPixel(&ring);
 
+  if (noiseOn) {
+    setupPiezo();
+  }
+  
   if (!neopixelsTest) {
     pinMode(PIN_TRIGGER, OUTPUT);  // Trigger is an output pin
     pinMode(PIN_ECHO, INPUT);      // Echo is an input pin
@@ -91,7 +103,7 @@ void setup() {
 ///////////
 
 void loop() {
-  
+
   // Read data from ultrasonic sensor and update NeoPixels
   if (!neopixelsTest) {
     
@@ -133,24 +145,31 @@ void loop() {
     }
 
     // Blink PHI
-    //if (maxBlinkDelay > 0.0) {
-      // Blink I
+    if (maxBlinkDelay > 0.01) {
+      // Turn I on
       fullWhite(&strip);
+      if (noiseOn) makeNoise();
       blinkDelay(maxBlinkDelay, GLITCH);
-      fullBlack(&strip);
-      //blinkDelay(0.3*maxBlinkDelay, GLITCH);
 
-      // Blink O
+      // Turn I off
+      fullBlack(&strip);
+      if (noiseOn) stopNoise();
+
+      // Turn O on
       fullWhite(&ring);
+      if (noiseOn) makeNoise();
       blinkDelay(maxBlinkDelay, GLITCH);
+      
+      // Turn 0 off
       fullBlack(&ring);
-      //blinkDelay(0.3*maxBlinkDelay, GLITCH);
-    
+      if (noiseOn) stopNoise();
+      
     // Show PHI
-    /*} else {
+    } else {
       fullWhite(&strip);
       fullWhite(&ring);
-    }*/
+      if (noiseOn) makeNoise();
+    }
 
 
   // NeoPixel test only (no data read)
