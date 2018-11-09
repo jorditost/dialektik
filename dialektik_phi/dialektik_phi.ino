@@ -25,11 +25,11 @@ boolean neopixelsTest = false;
 // Config
 ////////////
 
-// Trim values to set minimum and maximum ranges (will be about actual distances in cm's / 29) schreib was
+// Trim values to set minimum and maximum ranges (will be about actual distances in cm's / 29)
 // The position of the golden cut will be worked out as relative to these two points
 
-#define DISTANCE_MIN          3    // Enfernung in Centimeter // 200 // What is the base line sensor value which you want to count as being 0
-#define DISTANCE_MAX          100  // Enfernung in Centimeter // 960 // What is the maximum sensor value which you want to measure to
+#define DISTANCE_MIN          50    // Enfernung in Centimeter // 200 // What is the base line sensor value which you want to count as being 0
+#define DISTANCE_MAX          200  // Enfernung in Centimeter // 960 // What is the maximum sensor value which you want to measure to
 
 #define BLINK_DELAY_MAX       800       // Max time between on/off status while blinking
 #define GLITCH                false      // When glitch is true, then the blinking gets more random
