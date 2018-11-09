@@ -25,7 +25,7 @@ boolean neopixelsTest = false;
 // Config
 ////////////
 
-// Trim values to set minimum and maximum ranges (will be about actual distances in cm's / 29)
+// Trim values to set minimum and maximum ranges (will be about actual distances in cm's / 29) schreib was
 // The position of the golden cut will be worked out as relative to these two points
 
 #define DISTANCE_MIN          3    // Enfernung in Centimeter // 200 // What is the base line sensor value which you want to count as being 0
@@ -204,6 +204,3 @@ void blinkDelay(float delayTime, boolean isRandomTime) {
     delay(delayTime);
   }
 }
-
-
-
