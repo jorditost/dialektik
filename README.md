@@ -9,5 +9,5 @@ Code for the Dialektik Exhibition's artifacts
 
 ## Infrared Sensor
 
-- Sensor Model SRF05
-- Since it is not very precise, try with a HR-SR04 (the current sensor seems to be dead). The specs (PIN), etc.: https://www.robot-electronics.co.uk/htm/srf05tech.htm
+- Sensor Model HR-SR04
+- Since it is not very precise, try with a SRF05 (the current sensor seems to be dead). The specs (PIN), etc.: https://www.robot-electronics.co.uk/htm/srf05tech.htm
