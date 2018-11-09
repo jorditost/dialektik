@@ -1,5 +1,7 @@
 /*
   NeoPixels Functions
+  Library: https://github.com/adafruit/Adafruit_NeoPixel
+  Product: https://www.adafruit.com/product/1426
 */
 
 void initNeoPixel(Adafruit_NeoPixel * np) {

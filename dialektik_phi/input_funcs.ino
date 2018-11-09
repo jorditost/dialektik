@@ -3,7 +3,7 @@
   Reads from HC-SR04 Ultrasonic Sensor
 */
 
-int getData() {
+int getDistance() {
   // In order to generate the ultrasound you need to set the Trig on a High State for 10 µs. 
   // That will send out an 8 cycle sonic burst which will travel at the speed sound and 
   // it will be received in the Echo pin. The Echo pin will output the time in microseconds 
@@ -17,14 +17,14 @@ int getData() {
 
   // The sensor returns the duration in microseconds
   long duration = pulseIn(PIN_ECHO,HIGH);   // Waits for the echo pin to get high
-  return getDistance(duration);            // Use function to calculate the distance
+  return getDistanceCM(duration);            // Use function to calculate the distance
 }
 
 /*
   Get distance from the object in cm. Input is time in microseconds
   ((time in microseconds)*(Speed of sound)) / toward and backward of object)
 */
-int getDistance (long time) {
+int getDistanceCM (long time) {
   int distanceCalc;                        // Calculation variable
   distanceCalc = (time / 29) / 2;           // Actual calculation in cm
   //distanceCalc = (time * 0.034) / 2;      // Actual calculation in cm
